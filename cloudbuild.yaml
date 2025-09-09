@@ -37,11 +37,7 @@ steps:
 
 # Add more power, and more time, for heavy Skaffold build
 timeout: '3600s'
-substitutions:
-  _ZONE: 'us-central1-b'  # e.g. us-central1-b
-  _CLUSTER: 'demo-app-staging'  # e.g. demo-app-staging
 options:
   machineType: 'N1_HIGHCPU_8'
-  logging: 'CLOUD_LOGGING_ONLY'
   
 # [END cloudbuild_microservice_demo_cloudbuild]
