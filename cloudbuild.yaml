@@ -27,7 +27,7 @@
 
 steps:
 # Step 0: Install QEMU emulators for multi-arch builds
-- name: 'docker/binfmt:latest'
+- name: 'tonistiigi/binfmt:latest'
   entrypoint: 'bash'
   args:
     - '-c'
