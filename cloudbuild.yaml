@@ -26,6 +26,12 @@
 # `gcloud builds submit --config=cloudbuild.yaml --substitutions=_ZONE=us-central1-b,_CLUSTER=demo-app-staging .`
 
 steps:
+# Step 0: Install QEMU emulators for multi-arch builds
+- name: 'docker/binfmt:latest'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - 'docker run --privileged --rm tonistiigi/binfmt --install all'
 - id: 'Deploy application to cluster'
   name: 'gcr.io/k8s-skaffold/skaffold:v2.14.1'
   entrypoint: 'bash'
