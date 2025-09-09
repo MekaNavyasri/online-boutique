@@ -26,12 +26,6 @@
 # `gcloud builds submit --config=cloudbuild.yaml --substitutions=_ZONE=us-central1-b,_CLUSTER=demo-app-staging .`
 
 steps:
-# Step 0: Install QEMU emulators for multi-arch builds
-- name: 'tonistiigi/binfmt:latest'
-  entrypoint: 'sh'
-  args:
-    - '-c'
-    - 'docker run --privileged --rm tonistiigi/binfmt --install all'
 - id: 'Deploy application to cluster'
   name: 'gcr.io/k8s-skaffold/skaffold:v2.14.1'
   entrypoint: 'bash'
@@ -39,7 +33,7 @@ steps:
   - '-c'
   - >
     gcloud container clusters get-credentials --zone=$_ZONE $_CLUSTER;
-    skaffold run -f=skaffold.yaml --default-repo=gcr.io/$PROJECT_ID;
+    skaffold run -f=skaffold.yaml --default-repo=gcr.io/$PROJECT_ID --platform=linux/amd64;
 
 # Add more power, and more time, for heavy Skaffold build
 timeout: '3600s'
